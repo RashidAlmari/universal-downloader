@@ -25,7 +25,7 @@ let currentMediaData = null;
 // تحديد API_URL بناءً على البيئة
 const API_URL = (() => {
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        return 'https://universal-downloader-backend.onrender.com/api';
+        return 'https://universal-downloader-backend-psm2.onrender.com/api';
     }
     return 'http://localhost:3000/api';
 })();
