@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أداة تحميل الوسائط الشاملة - حمّل الفيديوهات والصور من جميع المنصات">
+    <title>أداة تحميل الوسائط - Universal Downloader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- الخلفية والأشكال الهندسية (Memphis Design) -->
+    <div class="background-shapes">
+        <div class="shape circle shape-1"></div>
+        <div class="shape triangle shape-2"></div>
+        <div class="shape rectangle shape-3"></div>
+        <div class="shape circle shape-4"></div>
+        <div class="shape diamond shape-5"></div>
+    </div>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🎬 أداة تحميل الوسائط</h1>
+                <p class="subtitle">حمّل أي مقطع أو صورة من أي موقع بسهولة!</p>
+            </div>
+            <div class="auth-buttons">
+                <button id="login-btn" class="btn btn-secondary">تسجيل الدخول</button>
+                <button id="logout-btn" class="btn btn-secondary" style="display: none;">تسجيل الخروج</button>
+                <span id="user-name" class="user-name"></span>
+            </div>
+        </header>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- نموذج الإدخال -->
+            <section class="input-section">
+                <div class="input-wrapper">
+                    <label for="url-input" class="input-label">أدخل رابط المقطع أو الصورة:</label>
+                    <div class="input-group">
+                        <input 
+                            type="url" 
+                            id="url-input" 
+                            class="url-input" 
+                            placeholder="https://youtube.com/watch?v=..."
+                            dir="ltr"
+                        >
+                        <button id="analyze-btn" class="btn btn-primary">
+                            <span>تحليل الرابط</span>
+                            <span class="spinner" id="spinner" style="display: none;">⏳</span>
+                        </button>
+                    </div>
+                    <div id="error-message" class="error-message" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- معاينة الوسائط -->
+            <section id="preview-section" class="preview-section" style="display: none;">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <h2>معاينة الوسائط</h2>
+                        <button id="close-preview" class="btn-close">✕</button>
+                    </div>
+
+                    <div class="preview-content">
+                        <!-- صورة المعاينة -->
+                        <div class="preview-image-wrapper">
+                            <img id="preview-image" src="" alt="معاينة" class="preview-image">
+                        </div>
+
+                        <!-- معلومات الوسائط -->
+                        <div class="media-info">
+                            <div class="info-item">
+                                <span class="info-label">العنوان:</span>
+                                <span id="media-title" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">المنصة:</span>
+                                <span id="media-platform" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">الحجم:</span>
+                                <span id="media-size" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">الجودة:</span>
+                                <span id="media-quality" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">المدة:</span>
+                                <span id="media-duration" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">المشاهدات:</span>
+                                <span id="media-views" class="info-value">-</span>
+                            </div>
+                        </div>
+
+                        <!-- شريط التقدم -->
+                        <div id="progress-wrapper" class="progress-wrapper" style="display: none;">
+                            <div class="progress-bar">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <p id="progress-text" class="progress-text">جاري التحميل: 0%</p>
+                        </div>
+
+                        <!-- زر التحميل -->
+                        <button id="download-btn" class="btn btn-success btn-large">
+                            ⬇️ حمّل الآن
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- سجل التحميلات -->
+            <section id="history-section" class="history-section" style="display: none;">
+                <div class="history-card">
+                    <div class="history-header">
+                        <h2>📋 سجل التحميلات</h2>
+                        <button id="clear-history-btn" class="btn btn-danger btn-small">مسح السجل</button>
+                    </div>
+                    <div id="history-list" class="history-list">
+                        <p class="empty-message">لا توجد تحميلات بعد</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- رسالة النجاح -->
+            <div id="success-message" class="toast toast-success" style="display: none;">
+                ✅ تم التحميل بنجاح! الملف جاهز للتحميل.
+            </div>
+
+            <!-- رسالة الخطأ -->
+            <div id="error-toast" class="toast toast-error" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 أداة تحميل الوسائط - جميع الحقوق محفوظة</p>
+            <p class="footer-note">🚀 تطبيق ويب حديث مع تصميم Memphis</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
